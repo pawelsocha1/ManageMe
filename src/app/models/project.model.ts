@@ -1,10 +1,10 @@
 export class Project {
-  public id: number;
+  public projectId: string;
   public name: string;
   public description: string;
 
-  constructor(id: number, name: string, description: string) {
-    this.id = id;
+  constructor(projectId: string, name: string, description: string) {
+    this.projectId = projectId;
     this.name = name;
     this.description = description;
   }

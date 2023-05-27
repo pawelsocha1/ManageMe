@@ -9,7 +9,6 @@ export class ProjectService {
   private currentProject: Project | null = null;
 
   constructor() {
-
     this.projects = []; 
   }
 
@@ -30,16 +29,18 @@ export class ProjectService {
   }
 
   updateProject(project: Project): void {
-    const index = this.projects.findIndex(p => p.id === project.id);
+    const index = this.projects.findIndex(p => p.projectId === project.projectId);
     if (index !== -1) {
       this.projects[index] = project;
     }
   }
 
-  deleteProject(project: Project): void {
-    const index = this.projects.findIndex(p => p.id === project.id);
+  deleteProject(projectId: string) {
+    const index = this.projects.findIndex(p => p.projectId === projectId);
     if (index !== -1) {
       this.projects.splice(index, 1);
     }
   }
+
 }
+
