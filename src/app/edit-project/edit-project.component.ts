@@ -47,8 +47,5 @@ export class EditProjectComponent implements OnInit {
       this.projectService.updateProject(updatedProject);
       this.router.navigate(['/projects']);
     }
-}
-editProject(projectId: string) {
-  this.router.navigate(['/edit-project', projectId]);
-}
+  }
 }

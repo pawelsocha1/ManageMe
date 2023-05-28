@@ -17,19 +17,13 @@ export class ProjectListComponent implements OnInit {
     this.projects = this.projectService.getProjects();
   }
 
-  deleteProject(projectId: string) {
-    const projectIndex = this.projects.findIndex((p) => p.projectId === projectId);
-
+  deleteProject(projectIndex: number) {
     if (projectIndex !== -1) {
       this.projects.splice(projectIndex, 1);
     }
   }
 
   editProject(projectId: string) {
-    const project = this.projects.find((p) => p.projectId === projectId);
-
-    if (project) {
-      this.router.navigate(['/edit-project', project.projectId]);
-    }
+    this.router.navigate(['/edit-project', projectId]);
   }
 }

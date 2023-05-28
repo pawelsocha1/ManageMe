@@ -1,10 +1,13 @@
 <h2>Lista projektów</h2>
-<div *ngFor="let project of projects">
-  <h2>{{ project.name }}</h2>
-  <p>{{ project.description }}</p>
-  <button (click)="editProject(project.projectId)">Edit</button>
-  <button (click)="deleteProject(project.projectId)">Delete</button>  
-</div>
+<ul>
+  <li *ngFor="let project of projects; let i = index">
+    <h4>{{ project.name }}</h4>
+    <p>{{ project.description }}</p>
+    <button (click)="deleteProject(i)">Delete</button>
+    <button (click)="editProject(project.projectId)">Edit</button>
+  </li>
+</ul>
+
 
 <ng-template #noProjects>
   <p>Brak dostępnych projektów.</p>
