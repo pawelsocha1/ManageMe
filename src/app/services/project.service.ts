@@ -9,38 +9,40 @@ export class ProjectService {
   private currentProject: Project | null = null;
 
   constructor() {
-    this.projects = []; 
+    const projectsFromStorage = localStorage.getItem('projects');
+    if (projectsFromStorage) {
+      this.projects = JSON.parse(projectsFromStorage);
+    } else {
+      this.projects = [];
+    }
   }
 
   getProjects(): Project[] {
     return this.projects;
   }
 
-  getCurrentProject(): Project | null {
-    return this.currentProject;
-  }
-
-  setCurrentProject(project: Project): void {
-    this.currentProject = project;
+  saveProjectsToStorage(): void {
+    localStorage.setItem('projects', JSON.stringify(this.projects));
   }
 
   createProject(project: Project): void {
     this.projects.push(project);
+    this.saveProjectsToStorage();
   }
 
   updateProject(project: Project): void {
     const index = this.projects.findIndex(p => p.projectId === project.projectId);
     if (index !== -1) {
       this.projects[index] = project;
+      this.saveProjectsToStorage();
     }
   }
 
-  deleteProject(projectId: string) {
+  deleteProject(projectId: string): void {
     const index = this.projects.findIndex(p => p.projectId === projectId);
     if (index !== -1) {
       this.projects.splice(index, 1);
+      this.saveProjectsToStorage();
     }
   }
-
 }
-
