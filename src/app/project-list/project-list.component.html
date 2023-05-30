@@ -3,10 +3,11 @@
   <li *ngFor="let project of projects; let i = index">
     <h4>{{ project.name }}</h4>
     <p>{{ project.description }}</p>
-    <button (click)="deleteProject(i)">Delete</button>
+    <button (click)="deleteProject(project)">Delete</button>
     <button (click)="editProject(project.projectId)">Edit</button>
   </li>
 </ul>
+<div>
 
 
 <ng-template #noProjects>

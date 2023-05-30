@@ -17,10 +17,9 @@ export class ProjectListComponent implements OnInit {
     this.projects = this.projectService.getProjects();
   }
 
-  deleteProject(projectIndex: number) {
-    if (projectIndex !== -1) {
-      this.projects.splice(projectIndex, 1);
-    }
+  deleteProject(project: Project): void {
+    this.projectService.deleteProject(project.projectId);
+    this.projects = this.projectService.getProjects();
   }
 
   editProject(projectId: string) {
