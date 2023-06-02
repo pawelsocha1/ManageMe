@@ -1,0 +1,12 @@
+<h2>Dodaj funkcjonalność</h2>
+
+<div>
+  <label for="functionality-name">Nazwa</label>
+  <input type="text" id="functionality-name" [(ngModel)]="functionality.name">
+  <label for="functionality-description">Opis</label>
+  <textarea id="functionality-description" [(ngModel)]="functionality.description"></textarea>
+
+
+
+  <button (click)="createFunctionality()">Dodaj</button>
+</div>

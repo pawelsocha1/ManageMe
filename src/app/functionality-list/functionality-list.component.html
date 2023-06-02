@@ -1,0 +1,12 @@
+<h2>Funkcjonalności</h2>
+
+<ul>
+  <li *ngFor="let functionality of functionalities">
+    <h4>{{ functionality.name }}</h4>
+    <p>{{ functionality.description }}</p>
+    <td>
+        <button (click)="editFunctionality(functionality)">Edytuj</button>
+        <button (click)="deleteFunctionality(functionality.functionalityId)">Usuń</button>
+      </td>
+  </li>
+</ul>

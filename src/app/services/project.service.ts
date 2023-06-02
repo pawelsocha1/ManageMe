@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Project } from '../models/project.model';
+import { Functionality } from '../models/functionality.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +46,5 @@ export class ProjectService {
       this.saveProjectsToStorage();
     }
   }
+
 }

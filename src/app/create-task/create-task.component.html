@@ -1,0 +1,11 @@
+<h2>Dodaj zadanie</h2>
+
+<div>
+  <label for="task-name">Nazwa</label>
+  <input type="text" id="task-name" [(ngModel)]="task.name">
+
+  <label for="task-description">Opis</label>
+  <textarea id="task-description" [(ngModel)]="task.description"></textarea>
+
+  <button (click)="createTask()">Dodaj</button>
+</div>
