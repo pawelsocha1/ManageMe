@@ -1,11 +1,19 @@
-<h2>Dodaj zadanie</h2>
-
-<div>
-  <label for="task-name">Nazwa</label>
-  <input type="text" id="task-name" [(ngModel)]="task.name">
-
-  <label for="task-description">Opis</label>
-  <textarea id="task-description" [(ngModel)]="task.description"></textarea>
-
-  <button (click)="createTask()">Dodaj</button>
-</div>
+<form (ngSubmit)="createTask()">
+  <div>
+    <label for="name">Nazwa zadania</label>
+    <input type="text" id="name" [(ngModel)]="task.name" name="name" required>
+  </div>
+  <div>
+    <label for="description">Opis zadania</label>
+    <textarea id="description" [(ngModel)]="task.description" name="description" required></textarea>
+  </div>
+  <div>
+    <label for="status">Status zadania</label>
+    <select id="status" [(ngModel)]="task.status" name="status" required>
+      <option value="TODO">TODO</option>
+      <option value="DOING">DOING</option>
+      <option value="DONE">DONE</option>
+    </select>
+  </div>
+  <button type="submit">Dodaj zadanie</button>
+</form>

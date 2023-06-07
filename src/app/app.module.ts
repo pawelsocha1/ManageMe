@@ -11,7 +11,8 @@ import { DeleteProjectComponent } from './delete-project/delete-project.componen
 import { CreateFunctionalityComponent } from './create-functionality/create-functionality.component';
 import { FunctionalityListComponent } from './functionality-list/functionality-list.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
-import { TaskListComponent } from './task-list/task-list.component'
+import { TaskListComponent } from './task-list/task-list.component';
+import { FunctionalityDetailsComponent } from './functionality-details/functionality-details.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TaskListComponent } from './task-list/task-list.component'
     CreateFunctionalityComponent,
     FunctionalityListComponent,
     CreateTaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    FunctionalityDetailsComponent
     
   ],
   imports: [

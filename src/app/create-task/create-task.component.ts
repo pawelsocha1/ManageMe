@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Task } from '../models/task.model';
-import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-create-task',
@@ -8,21 +7,22 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./create-task.component.css']
 })
 export class CreateTaskComponent {
+  @Output() taskAdded: EventEmitter<Task> = new EventEmitter<Task>();
+
   task: Task = {
     taskId: 0,
     name: '',
-    description: ''
+    description: '',
+    status: 'TODO'
   };
 
-  constructor(private taskService: TaskService) { }
-
   createTask(): void {
-    this.taskService.createTask(this.task);
+    this.taskAdded.emit(this.task);
     this.task = {
-      taskId:  this.task.taskId + 1,
+      taskId: 0,
       name: '',
-      description: ''
+      description: '',
+      status: 'TODO'
     };
   }
 }
-

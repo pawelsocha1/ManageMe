@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Functionality } from '../models/functionality.model';
+import { Task } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,17 @@ export class FunctionalityService {
     if (index !== -1) {
       this.functionalities.splice(index, 1);
       this.saveFunctionalitiesToLocalStorage();
+    }
+  }
+
+  getFunctionalityById(id: number): Functionality | undefined {
+    return this.functionalities.find(func => func.functionalityId === id);
+  }
+
+  addTaskToFunctionality(functionalityId: number, task: Task): void {
+    const functionality = this.getFunctionalityById(functionalityId);
+    if (functionality) {
+      functionality.tasks.push(task);
     }
   }
 

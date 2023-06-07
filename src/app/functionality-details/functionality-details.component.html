@@ -1,0 +1,15 @@
+<h2>{{ functionality?.name }}</h2>
+<p>{{ functionality?.description }}</p>
+
+<h3>Zadania</h3>
+<ul>
+  <li *ngFor="let functionality of functionalities">
+    <h4>{{ functionality.name }}</h4>
+    <button (click)="selectedFunctionalityIndex = functionality.functionalityId">Dodaj zadanie</button>
+    <ul>
+      <li *ngFor="let task of functionality.tasks">{{ task.name }}</li>
+    </ul>
+  </li>
+</ul>
+
+<app-create-task (taskAdded)="onTaskAdded($event)"></app-create-task>
