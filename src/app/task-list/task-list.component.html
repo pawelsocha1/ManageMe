@@ -4,8 +4,9 @@
   <li *ngFor="let task of tasks">
     <h4>{{ task.name }}</h4>
     <p>{{ task.description }}</p>
-    <td>
+    <p>{{task.status}}</p>
+    <p>{{task.functionalityId}}</p>
+    <p>{{ task.name }} (ID: {{ task.taskId }})
         <button (click)="deleteTask(task)">Usuń</button>
-      </td>
   </li>
 </ul>

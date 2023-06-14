@@ -14,6 +14,12 @@
       <option value="DOING">DOING</option>
       <option value="DONE">DONE</option>
     </select>
+    <label for="functionality-select">Funkcjonalność:</label>
+<select id="functionality-select" [(ngModel)]="task.functionalityId">
+  <option *ngFor="let functionality of functionalities" [value]="functionality.functionalityId">
+    {{ functionality.name }} (ID: {{ functionality.functionalityId }})
+  </option>
+</select>
   </div>
   <button type="submit">Dodaj zadanie</button>
 </form>

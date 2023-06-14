@@ -7,7 +7,8 @@ import { Task } from '../models/task.model';
 export class TaskService {
     private localStorageKey = 'tasks';
     private tasks: Task[] = [];
-  
+    private taskIdCounter: number = 1;
+
     constructor() {
         this.loadTasksFromLocalStorage();
       }
@@ -15,6 +16,13 @@ export class TaskService {
       getTasks(): Task[] {
         return this.tasks;
       }
+
+      getNewTaskId(): number {
+        const newTaskId = this.taskIdCounter;
+        this.taskIdCounter++;
+        return newTaskId;
+      }
+    
 
   createTask(task: Task): void {
     this.tasks.push(task);
