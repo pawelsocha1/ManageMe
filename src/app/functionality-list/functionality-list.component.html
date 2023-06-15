@@ -5,7 +5,9 @@
     <h4>{{ functionality.name }}</h4>
     <p>{{ functionality.description }}</p>
     <td>
-        <button (click)="editFunctionality(functionality)">Edytuj</button>
+      <button (click)="editFunctionality(functionality.functionalityId)" routerLink="/edit-functionality/{{ functionality.functionalityId }}">
+        Edytuj
+      </button>
         <button (click)="deleteFunctionality(functionality.functionalityId)">Usuń</button>
       </td>
   </li>

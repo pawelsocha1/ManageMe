@@ -23,7 +23,10 @@ export class TaskService {
         return newTaskId;
       }
     
-
+      getTaskById(id: number): Task | undefined {
+        return this.tasks.find(task => task.taskId === id);
+      }
+      
   createTask(task: Task): void {
     this.tasks.push(task);
     this.saveTasksToLocalStorage();
@@ -51,6 +54,9 @@ export class TaskService {
       this.tasks = JSON.parse(tasksData);
     }
   }
+
+
+
 
   private saveTasksToLocalStorage(): void {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.tasks));

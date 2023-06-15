@@ -1,0 +1,21 @@
+<h2>Edytuj Funkcjonalność</h2>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="functionality">
+  <form (ngSubmit)="updateFunctionality()" #editForm="ngForm">
+    <div>
+      <label for="name">Nazwa:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="functionality.name" required>
+    </div>
+
+    <div>
+      <label for="description">Opis:</label>
+      <textarea id="description" name="description" [(ngModel)]="functionality.description" required></textarea>
+    </div>
+
+    <button type="submit">Wyślij</button>
+  </form>
+</div>

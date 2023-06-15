@@ -8,5 +8,7 @@
     <p>{{task.functionalityId}}</p>
     <p>{{ task.name }} (ID: {{ task.taskId }})
         <button (click)="deleteTask(task)">Usuń</button>
+        <button (click)="editTask(task.taskId)">Edytuj</button>
+         
   </li>
 </ul>
