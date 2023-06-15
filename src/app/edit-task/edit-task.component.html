@@ -10,6 +10,14 @@
       <label for="description">Opis:</label>
       <textarea id="description" name="description" [(ngModel)]="task.description"></textarea>
     </div>
+    <div>   
+      <label for="status">Status:</label>
+      <select id="status" name="status" [(ngModel)]="task.status" required>
+        <option value="TODO">TODO</option>
+        <option value="DOING">DOING</option>
+        <option value="DONE">DONE</option>
+      </select>
+    </div>
 
 
     <button type="submit">Wyślij</button>

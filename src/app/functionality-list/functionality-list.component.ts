@@ -19,13 +19,23 @@ export class FunctionalityListComponent implements OnInit {
     this.getFunctionalities();
   }
 
+  
+  
   getFunctionalities(): void {
-    this.functionalities = this.functionalityService.getFunctionalities();
+    this.functionalityService.getFunctionalities()
+      .subscribe((functionalities: Functionality[]) => {
+        this.functionalities = functionalities;
+      });
   }
+
 
   
   editFunctionality(functionalityId: number) {
     this.router.navigate(['/edit-functionality', functionalityId]);
+  }
+
+  navigateToFunctionalityDetails(functionality: Functionality) {
+    this.router.navigate(['/functionality-details', functionality.functionalityId]);
   }
   
   

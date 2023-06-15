@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 export class EditTaskComponent implements OnInit {
   taskId!: number;
   task: Task | undefined;
+  taskStatus: string = '';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +32,9 @@ export class EditTaskComponent implements OnInit {
   updateTask(): void {
     if (this.task) {
       this.taskService.updateTask(this.task);
+      this.taskService.updateTaskStatus(this.task.status); 
       this.router.navigate(['/tasks', this.taskId]);
     }
   }
-}
+  }
+

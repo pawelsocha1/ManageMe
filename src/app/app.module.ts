@@ -15,21 +15,9 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { FunctionalityDetailsComponent } from './functionality-details/functionality-details.component';
 import { EditFunctionalityComponent } from './edit-functionality/edit-functionality.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FilterByStatusPipe } from './filter-by-status.pipe';
 
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/projects', pathMatch: 'full' },
-  { path: 'projects', component: ProjectListComponent },
-  { path: 'create-project', component: CreateProjectComponent },
-  { path: 'edit-project/:id', component: EditProjectComponent },
-  { path: 'create-functionality', component: CreateFunctionalityComponent },
-  { path: 'edit-functionality/:id', component: EditFunctionalityComponent },
-  { path: 'functionality-list', component: FunctionalityListComponent },
-  { path: 'create-task', component: CreateTaskComponent },
-  { path: 'task-list', component: TaskListComponent },
-  { path: 'functionality-details/:id', component: FunctionalityDetailsComponent },
-  {path: 'edit-task/:id', component: EditTaskComponent }
-  
-];
 
 @NgModule({
   declarations: [
@@ -44,13 +32,15 @@ const appRoutes: Routes = [
     TaskListComponent,
     FunctionalityDetailsComponent,
     EditFunctionalityComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    FilterByStatusPipe
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

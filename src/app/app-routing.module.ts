@@ -6,23 +6,30 @@ import { FunctionalityDetailsComponent } from './functionality-details/functiona
 import {EditFunctionalityComponent} from './edit-functionality/edit-functionality.component';
 import { FunctionalityListComponent } from './functionality-list/functionality-list.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { TaskListComponent } from './task-list/task-list.component';
 
 
 
-const routes: Routes = [
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/projects', pathMatch: 'full' },
+  { path: 'projects', component: ProjectListComponent },
+  { path: 'create-project', component: CreateProjectComponent },
   { path: 'edit-project/:id', component: EditProjectComponent },
   { path: 'create-functionality', component: CreateFunctionalityComponent },
-  { path: '', redirectTo: '/functionalities', pathMatch: 'full' },
-  { path: 'functionalities', component: FunctionalityListComponent },
-  { path: 'functionalities/:id', component: FunctionalityDetailsComponent },
   { path: 'edit-functionality/:id', component: EditFunctionalityComponent },
+  { path: 'functionality-list', component: FunctionalityListComponent },
+  { path: 'create-task', component: CreateTaskComponent },
+  { path: 'task-list', component: TaskListComponent },
   { path: 'edit-task/:id', component: EditTaskComponent },
-  { path: 'tasks/:id', component: EditTaskComponent }
+  { path: 'functionality-details/:functionalityId', component: FunctionalityDetailsComponent },
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
