@@ -42,7 +42,6 @@ export class CreateTaskComponent implements OnInit {
     if (this.taskForm.valid) {
       const newTask = new Task(
         this.taskForm.value.taskId,
-         // Pobieramy wartość z wybranej funkcjonalności z formularza
         this.taskForm.value.name,
         this.taskForm.value.description,
         this.taskForm.value.status,

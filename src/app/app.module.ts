@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
-import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { CreateFunctionalityComponent } from './create-functionality/create-functionality.component';
 import { FunctionalityListComponent } from './functionality-list/functionality-list.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
@@ -17,6 +16,9 @@ import { EditFunctionalityComponent } from './edit-functionality/edit-functional
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FilterByStatusPipe } from './filter-by-status.pipe';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { UserPanelComponent } from './user-panel.component';
 
 
 @NgModule({
@@ -25,7 +27,6 @@ import { FilterByStatusPipe } from './filter-by-status.pipe';
     ProjectListComponent,
     CreateProjectComponent,
     EditProjectComponent,
-    DeleteProjectComponent,
     CreateFunctionalityComponent,
     FunctionalityListComponent,
     CreateTaskComponent,
@@ -33,7 +34,10 @@ import { FilterByStatusPipe } from './filter-by-status.pipe';
     FunctionalityDetailsComponent,
     EditFunctionalityComponent,
     EditTaskComponent,
-    FilterByStatusPipe
+    FilterByStatusPipe,
+    LoginFormComponent,
+    RegistrationFormComponent,
+    UserPanelComponent
   ],
   imports: [
     BrowserModule,

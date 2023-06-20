@@ -41,4 +41,12 @@ export class FunctionalityDetailsComponent implements OnInit {
       this.tasks = this.functionality.tasks; 
     }
   }
+  
+  getTasksForFunctionality(): void {
+    if (this.functionality) {
+      this.functionalityService.getTasksForFunctionality(this.functionality.functionalityId).subscribe((tasks: Task[]) => {
+        this.tasks = tasks;
+      });
+    }
+  }
 }
