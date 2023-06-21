@@ -19,6 +19,7 @@ import { FilterByStatusPipe } from './filter-by-status.pipe';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { UserPanelComponent } from './user-panel.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { UserPanelComponent } from './user-panel.component';
     FilterByStatusPipe,
     LoginFormComponent,
     RegistrationFormComponent,
-    UserPanelComponent
+    UserPanelComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

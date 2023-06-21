@@ -33,7 +33,7 @@ export class CreateTaskComponent implements OnInit {
 
   getFunctionalities() {
     this.functionalityService.getFunctionalities()
-      .subscribe(functionalities => {
+      .subscribe((functionalities: Functionality[]) => {
         this.functionalities = functionalities;
       });
   }
@@ -41,16 +41,18 @@ export class CreateTaskComponent implements OnInit {
   createTask() {
     if (this.taskForm.valid) {
       const newTask = new Task(
-        this.taskForm.value.taskId,
+        this.taskService.getNewTaskId(),
         this.taskForm.value.name,
         this.taskForm.value.description,
         this.taskForm.value.status,
         this.taskForm.value.functionalityId
       );
       const functionalityId = this.taskForm.value.functionalityId;
-      this.functionalityService.createTask(functionalityId, newTask);
-
+      console.log('Creating task for functionalityId:', functionalityId); // Dodaj ten wydruk konsoli
+      this.functionalityService.addTaskToFunctionality(functionalityId, newTask);
+  
       this.taskService.createTask(newTask);
     }
   }
+  
 }

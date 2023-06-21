@@ -24,29 +24,28 @@ export class FunctionalityDetailsComponent implements OnInit {
   }
 
   getFunctionality(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get('functionalityId'));
     this.functionalityService.getFunctionalities()
       .pipe(
         tap((functionalities: Functionality[]) => {
           this.functionality = functionalities.find(func => func.functionalityId === id);
+          console.log('Selected functionality:', this.functionality);
         })
       )
       .subscribe(() => {
-        this.getTasks();
+        this.getTasksForFunctionality(); 
+
       });
   }
 
-  getTasks(): void {
-    if (this.functionality) {
-      this.tasks = this.functionality.tasks; 
-    }
-  }
-  
   getTasksForFunctionality(): void {
+    console.log(this.functionality?.functionalityId)
     if (this.functionality) {
-      this.functionalityService.getTasksForFunctionality(this.functionality.functionalityId).subscribe((tasks: Task[]) => {
-        this.tasks = tasks;
-      });
+      this.functionalityService.getTasksForFunctionality(this.functionality.functionalityId)
+        .subscribe((tasks: Task[]) => {
+          this.tasks = tasks;
+          console.log('Tasks for functionality:', this.tasks);
+        });
     }
   }
 }

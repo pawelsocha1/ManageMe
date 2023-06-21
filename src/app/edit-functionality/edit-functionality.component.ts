@@ -25,20 +25,22 @@ export class EditFunctionalityComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.functionalityId = Number(params.get('id'));
-      const functionality = this.functionalityService.getFunctionalityById(this.functionalityId);
-    
-      if (functionality) {
-        this.functionality = functionality;
-      } else {
-        this.errorMessage = 'Functionality not found.';
-      }
+      this.functionalityService.getFunctionalityById(this.functionalityId).subscribe(
+        functionality => {
+          if (functionality) {
+            this.functionality = functionality;
+          } else {
+            this.errorMessage = 'Functionality not found.';
+          }
+        }
+      );
     });
   }
   
 
   updateFunctionality(): void {
     this.functionalityService.updateFunctionality(this.functionality);
-    this.router.navigate(['/functionalities', this.functionalityId]);
+    this.router.navigate(['/functionality-list', this.functionalityId]);
   }
 }
 

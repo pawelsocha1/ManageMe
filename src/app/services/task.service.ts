@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,9 @@ export class TaskService {
   private taskStatusSubject = new BehaviorSubject<string>('');
 
   taskStatus$ = this.taskStatusSubject.asObservable();
+  private taskDeletedSubject = new BehaviorSubject<number>(0);
 
-  updateTaskStatus(status: string) {
-    this.taskStatusSubject.next(status);
-  }
+  taskDeleted$ = this.taskDeletedSubject.asObservable();
 
   constructor() {
     this.loadTasksFromLocalStorage();
@@ -34,39 +33,48 @@ export class TaskService {
     return newTaskId;
   }
 
-  getTaskById(id: number): Task | undefined {
-    return this.tasks.find((task) => task.taskId === id);
+  getTaskById(id: number): Observable<Task | undefined> {
+    const task = this.tasks.find((task) => task.taskId === id);
+    return of(task);
   }
+  
 
   createTask(task: Task): void {
     this.tasks.push(task);
     this.saveTasksToLocalStorage();
   }
 
-  updateTask(updatedtask: Task): void {
-    const index = this.tasks.findIndex((f) => f.taskId === updatedtask.taskId);
+  updateTask(updatedTask: Task): void {
+    const index = this.tasks.findIndex((task) => task.taskId === updatedTask.taskId);
     if (index !== -1) {
-      this.tasks[index] = updatedtask;
+      this.tasks[index] = updatedTask;
       this.saveTasksToLocalStorage();
     }
   }
 
   deleteTask(taskId: number): void {
-    const index = this.tasks.findIndex((f) => f.taskId === taskId);
+    const index = this.tasks.findIndex((task) => task.taskId === taskId);
     if (index !== -1) {
       this.tasks.splice(index, 1);
       this.saveTasksToLocalStorage();
+      this.taskDeletedSubject.next(taskId);
     }
   }
+  
 
   private loadTasksFromLocalStorage(): void {
     const tasksData = localStorage.getItem(this.localStorageKey);
     if (tasksData) {
       this.tasks = JSON.parse(tasksData);
+      this.taskIdCounter = this.tasks.length + 1; 
     }
   }
 
   private saveTasksToLocalStorage(): void {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.tasks));
+  }
+
+  updateTaskStatus(status: string): void {
+    this.taskStatusSubject.next(status);
   }
 }

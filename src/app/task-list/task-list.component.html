@@ -5,6 +5,11 @@
       <li *ngFor="let task of tasks | filterByStatus:'TODO'" class="task">
         <div class="task-header">
           <h3>{{ task.name }}</h3>
+          <div>
+            <button (click)="editTask(task.taskId)">Edytuj</button>
+            <button (click)="deleteTask(task)">Usuń</button>
+            <button (click)="navigateToTaskDetails(task.taskId)">Szczegóły</button>
+          </div>
         </div>
         <p>{{ task.description }}</p>
       </li>
@@ -16,6 +21,11 @@
       <li *ngFor="let task of tasks | filterByStatus:'DOING'" class="task">
         <div class="task-header">
           <h3>{{ task.name }}</h3>
+          <div>
+            <button (click)="editTask(task.taskId)">Edytuj</button>
+            <button (click)="deleteTask(task)">Usuń</button>
+            <button (click)="navigateToTaskDetails(task.taskId)">Szczegóły</button>
+          </div>
         </div>
         <p>{{ task.description }}</p>
       </li>
@@ -27,6 +37,11 @@
       <li *ngFor="let task of tasks | filterByStatus:'DONE'" class="task">
         <div class="task-header">
           <h3>{{ task.name }}</h3>
+          <div>
+            <button (click)="editTask(task.taskId)">Edytuj</button>
+            <button (click)="deleteTask(task)">Usuń</button>
+            <button (click)="navigateToTaskDetails(task.taskId)">Szczegóły</button>
+          </div>
         </div>
         <p>{{ task.description }}</p>
       </li>

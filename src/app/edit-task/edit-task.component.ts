@@ -24,10 +24,12 @@ export class EditTaskComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.taskId = Number(params.get('id'));
-      this.task = this.taskService.getTaskById(this.taskId);
-      console.log(this.taskId);
+      this.taskService.getTaskById(this.taskId).subscribe((task: Task | undefined) => {
+        this.task = task;
+      });
     });
   }
+  
 
   updateTask(): void {
     if (this.task) {

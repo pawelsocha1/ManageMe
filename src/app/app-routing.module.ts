@@ -13,6 +13,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { AuthGuard } from './services/auth.guard';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
 const appRoutes: Routes = [
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'functionality-details/:functionalityId', component: FunctionalityDetailsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegistrationFormComponent },
-  { path: '', redirectTo: '/projects', pathMatch: 'full' },
+  { path: 'task-details/:taskId', component: TaskDetailsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/projects' }
 ];
 

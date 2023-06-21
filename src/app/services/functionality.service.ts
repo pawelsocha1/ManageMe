@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Functionality } from '../models/functionality.model';
 import { Task } from '../models/task.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +9,26 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class FunctionalityService {
   private localStorageKey = 'functionalities';
   private functionalities: Functionality[] = [];
-  private taskStatusSubject = new BehaviorSubject<string>('');
+  private selectedFunctionalitySubject = new BehaviorSubject<Functionality | undefined>(undefined);
 
-  taskStatus$ = this.taskStatusSubject.asObservable();
+
+  selectedFunctionality$ = this.selectedFunctionalitySubject.asObservable();
 
   constructor() {
-    const storedFunctionalities = localStorage.getItem(this.localStorageKey);
-    if (storedFunctionalities) {
-      this.functionalities = JSON.parse(storedFunctionalities);
-    }
+    this.loadFunctionalitiesFromLocalStorage();
   }
 
   createFunctionality(functionality: Functionality): void {
+    functionality.functionalityId = this.generateUniqueFunctionalityId();
     this.functionalities.push(functionality);
     this.saveFunctionalitiesToLocalStorage();
   }
+  
+  private generateUniqueFunctionalityId(): number {
+    const timestamp = new Date().getTime();
+    return timestamp;
+  }
+  
   
   updateFunctionality(updatedFunctionality: Functionality): void {
     const index = this.functionalities.findIndex(f => f.functionalityId === updatedFunctionality.functionalityId);
@@ -41,39 +46,78 @@ export class FunctionalityService {
     }
   }
 
-  getFunctionalityById(id: number): Functionality | undefined {
-    return this.functionalities.find(func => func.functionalityId === id);
+  getFunctionalityById(id: number): Observable<Functionality | undefined> {
+    return this.getFunctionalities().pipe(
+      map((functionalities: Functionality[]) => {
+        return functionalities.find(func => func.functionalityId === id);
+      })
+    );
+  }
+  
+
+  setSelectedFunctionality(functionality: Functionality): void {
+    this.selectedFunctionalitySubject.next(functionality);
   }
 
   addTaskToFunctionality(functionalityId: number, task: Task): void {
-    const functionality = this.getFunctionalityById(functionalityId);
+    const functionality = this.functionalities.find(func => func.functionalityId === functionalityId);
     if (functionality) {
       functionality.tasks.push(task);
-    }
-  }
-
-  private saveFunctionalitiesToLocalStorage(): void {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.functionalities));
-  }
-
-  getFunctionalities(): Observable<Functionality[]> {
-    return of(this.functionalities);
-  }
-
-  getTasksForFunctionality(functionalityId: number): Observable<Task[]> {
-    const functionality = this.getFunctionalityById(functionalityId);
-    if (functionality) {
-      return of(functionality.tasks);
-    } else {
-      return of([]);
-    }
-  }
-
-  createTask(functionalityId: number, task: Task): void {
-    const functionality = this.getFunctionalityById(functionalityId);
-    if (functionality) {
-      functionality.tasks.push(task);
+      console.log('Tasks after adding:', functionality.tasks); 
       this.saveFunctionalitiesToLocalStorage();
     }
   }
+  
+  
+  
+
+  private loadFunctionalitiesFromLocalStorage(): void {
+    const storedFunctionalities = localStorage.getItem(this.localStorageKey);
+    if (storedFunctionalities) {
+      this.functionalities = JSON.parse(storedFunctionalities).map((func: Functionality) => {
+        if (!func.tasks) {
+          func.tasks = [];
+        }
+        return func;
+      });
+      console.log('Loaded functionalities:', this.functionalities);
+    } else {
+      console.log('No functionalities found in localStorage');
+    }
+  }
+  
+  
+  
+  private saveFunctionalitiesToLocalStorage(): void {
+    const serializedFunctionalities = JSON.stringify(this.functionalities);
+    localStorage.setItem(this.localStorageKey, serializedFunctionalities);
+  }
+  
+
+  getFunctionalities(): Observable<Functionality[]> {
+    return of(this.functionalities).pipe(
+      tap((functionalities: Functionality[]) => {
+        functionalities.forEach(func => {
+          if (!func.tasks) {
+            func.tasks = [];
+          }
+        });
+      })
+    );
+  }
+  
+
+  getTasksForFunctionality(functionalityId: number): Observable<Task[]> {
+    return this.getFunctionalities().pipe(
+      map((functionalities: Functionality[]) => {
+        const functionality = functionalities.find(func => func.functionalityId === functionalityId);
+        return functionality ? functionality.tasks : [];
+      })
+    );
+  }
+  
+  
+  
 }
+  
+
