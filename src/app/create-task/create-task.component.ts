@@ -45,10 +45,11 @@ export class CreateTaskComponent implements OnInit {
         this.taskForm.value.name,
         this.taskForm.value.description,
         this.taskForm.value.status,
+        this.taskForm.value.priority,
         this.taskForm.value.functionalityId
       );
       const functionalityId = this.taskForm.value.functionalityId;
-      console.log('Creating task for functionalityId:', functionalityId); // Dodaj ten wydruk konsoli
+      console.log('Creating task for functionalityId:', functionalityId); 
       this.functionalityService.addTaskToFunctionality(functionalityId, newTask);
   
       this.taskService.createTask(newTask);

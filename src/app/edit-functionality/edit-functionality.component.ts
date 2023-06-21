@@ -40,7 +40,7 @@ export class EditFunctionalityComponent {
 
   updateFunctionality(): void {
     this.functionalityService.updateFunctionality(this.functionality);
-    this.router.navigate(['/functionality-list', this.functionalityId]);
+    this.router.navigate(['/functionality-list']);
   }
 }
 

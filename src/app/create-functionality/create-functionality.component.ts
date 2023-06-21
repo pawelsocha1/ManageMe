@@ -12,6 +12,8 @@ export class CreateFunctionalityComponent {
     functionalityId: 0,
     name: '',
     description: '',
+    status: 'TODO',
+    priority: 'ŚREDNI',
     tasks: []
   };
 
@@ -23,6 +25,8 @@ export class CreateFunctionalityComponent {
       functionalityId: this.functionality.functionalityId + 1,
       name: '',
       description: '',
+      status: 'TODO',
+      priority: 'ŚREDNI',
       tasks: []
     };
   }

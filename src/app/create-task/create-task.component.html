@@ -16,6 +16,14 @@
     </select>
   </div>
   <div>
+    <label for="priority">Priorytet:</label>
+    <select formControlName="priority" id="priority" class="form-control">
+      <option value="niski">Niski</option>
+      <option value="średni">Średni</option>
+      <option value="wysoki">Wysoki</option>
+    </select>
+  </div>
+  <div>
     <label for="functionality">Funkcjonalność:</label>
     <select formControlName="functionalityId">
       <option *ngFor="let functionality of functionalities" [value]="functionality.functionalityId">{{ functionality.name }}</option>

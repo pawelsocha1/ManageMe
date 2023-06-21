@@ -1,8 +1,10 @@
 <div *ngIf="task">
-  <h2>Task Details</h2>
-  <p>Task ID: {{ task.taskId }}</p>
-  <p>Name: {{ task.name }}</p>
-  <p>Description: {{ task.description }}</p>
+  <h2>Szczegóły zadania</h2>
+  <p>ID Zadania: {{ task.taskId }}</p>
+  <p>Nazwa: {{ task.name }}</p>
+  <p>Opis: {{ task.description }}</p>
   <p>Status: {{ task.status }}</p>
-  <p>Functionality ID: {{ task.functionalityId }}</p>
+  <p>Priorytet: {{ task.priority }}</p>
+  <p>ID Funkcjonalności: {{ task.functionalityId }}</p>
 </div>
+

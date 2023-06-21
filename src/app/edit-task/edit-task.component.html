@@ -1,25 +1,31 @@
-<h2>Edytuj Zadanie</h2>
-
 <div *ngIf="task">
-  <form (submit)="updateTask()">
+  <h2>Edytuj zadanie</h2>
+  <form [formGroup]="editForm" (ngSubmit)="updateTask()">
     <div>
       <label for="name">Nazwa:</label>
-      <input type="text" id="name" name="name" [(ngModel)]="task.name" required>
+      <input type="text" id="name" formControlName="name" required>
     </div>
     <div>
       <label for="description">Opis:</label>
-      <textarea id="description" name="description" [(ngModel)]="task.description"></textarea>
+      <textarea id="description" formControlName="description" required></textarea>
     </div>
-    <div>   
+    <div>
       <label for="status">Status:</label>
-      <select id="status" name="status" [(ngModel)]="task.status" required>
+      <select id="status" formControlName="status" required>
         <option value="TODO">TODO</option>
         <option value="DOING">DOING</option>
         <option value="DONE">DONE</option>
       </select>
     </div>
-
-
+    <div>
+      <label for="priority">Priorytet:</label>
+      <select id="priority" formControlName="priority" required>
+        <option value="NISKI">NISKI</option>
+        <option value="ŚREDNI">ŚREDNI</option>
+        <option value="WYSOKI">WYSOKI</option>
+      </select>
+    </div>
+    
     <button type="submit">Wyślij</button>
   </form>
 </div>

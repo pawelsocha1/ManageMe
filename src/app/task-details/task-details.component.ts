@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
-import { of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-task-details',
@@ -10,6 +9,7 @@ import { of, switchMap, tap } from 'rxjs';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent implements OnInit {
+  taskId!: number;
   task: Task | undefined;
 
   constructor(
@@ -18,27 +18,11 @@ export class TaskDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getTask();
-  }
-
-  getTask(): void {
-    const taskId = Number(this.route.snapshot.paramMap.get('id'));
-    this.taskService.getTaskById(taskId)
-      .subscribe({
-        next: (task: Task | undefined) => {
-          if (task) {
-            this.task = task;
-          } else {
-            // Handle the case when the task with the given ID is not found
-          }
-        },
-        error: (error: any) => {
-          // Handle the error, e.g., display an error message
-        }
+    this.route.paramMap.subscribe(params => {
+      this.taskId = Number(params.get('taskId'));
+      this.taskService.getTaskById(this.taskId).subscribe((task: Task | undefined) => {
+        this.task = task;
       });
+    });
   }
-}  
-  
-        
-  
-
+}
