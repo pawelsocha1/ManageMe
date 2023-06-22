@@ -14,7 +14,9 @@ export class CreateFunctionalityComponent {
     description: '',
     status: 'TODO',
     priority: 'ŚREDNI',
-    tasks: []
+    tasks: [],
+    creationDate: new Date(),
+    startDate: undefined
   };
 
   constructor(private functionalityService: FunctionalityService) { }
@@ -27,7 +29,9 @@ export class CreateFunctionalityComponent {
       description: '',
       status: 'TODO',
       priority: 'ŚREDNI',
-      tasks: []
+      tasks: [],
+      creationDate: new Date(),
+      startDate: undefined
     };
   }
 }

@@ -8,6 +8,8 @@ export class Functionality {
     status: 'TODO' | 'DOING' | 'DONE';
     priority: 'NISKI' | 'ŚREDNI' | 'WYSOKI';
     tasks: Task[];
+    creationDate: Date;
+    startDate?: Date;
  
     constructor(
       functionalityId: number,
@@ -15,7 +17,7 @@ export class Functionality {
       description: string,
       status: 'TODO' | 'DOING' | 'DONE',
       priority: 'NISKI' | 'ŚREDNI' | 'WYSOKI',
-      tasks: Task[]
+      tasks: Task[],
     ) {
       this.functionalityId = functionalityId;
       this.name = name;
@@ -23,6 +25,8 @@ export class Functionality {
       this.status = status;
       this.priority = priority;
       this.tasks = tasks;
+      this.creationDate = new Date();
+      this.startDate = undefined;
     }
   }
   
