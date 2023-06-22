@@ -24,7 +24,10 @@ export class EditTaskComponent implements OnInit {
       name: new FormControl(),
       description: new FormControl(),
       status: new FormControl(),
-      priority: new FormControl()
+      priority: new FormControl(),
+      estimatedTime: new FormControl(), // Add estimatedTime form control
+      startDate: new FormControl(), // Add startDate form control
+      endDate: new FormControl() // Add endDate form control
     });
   }
 
@@ -38,7 +41,10 @@ export class EditTaskComponent implements OnInit {
             name: this.task.name,
             description: this.task.description,
             status: this.task.status,
-            priority: this.task.priority
+            priority: this.task.priority,
+            estimatedTime: this.task.estimatedTime, // Patch estimatedTime value
+            startDate: this.task.startDate, // Patch startDate value
+            endDate: this.task.endDate // Patch endDate value
           });
         }
       });
@@ -52,10 +58,12 @@ export class EditTaskComponent implements OnInit {
         name: this.editForm.value.name,
         description: this.editForm.value.description,
         status: this.editForm.value.status,
-        priority: this.editForm.value.priority
+        priority: this.editForm.value.priority,
+        estimatedTime: this.editForm.value.estimatedTime,
+        startDate: this.editForm.value.status === 'DOING' ? new Date() : this.task.startDate,
+        endDate: this.editForm.value.status === 'DONE' ? new Date() : this.task.endDate
       };
       this.taskService.updateTask(updatedTask);
-      this.taskService.updateTaskStatus(updatedTask.status);
       this.router.navigate(['/task-list']);
     }
   }

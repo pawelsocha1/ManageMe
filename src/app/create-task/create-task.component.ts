@@ -13,7 +13,18 @@ import { TaskService } from '../services/task.service';
 export class CreateTaskComponent implements OnInit {
   taskForm: FormGroup;
   functionalities: Functionality[] = [];
-
+  task: Task = {
+    taskId: 0,
+    name: '',
+    description: '',
+    functionalityId: 0,
+    estimatedTime: 0,
+    status: 'TODO',
+    priority: 'NISKI',
+    createdDate: new Date(),
+    startDate: undefined,
+    endDate: undefined
+  };
   constructor(
     private formBuilder: FormBuilder,
     private functionalityService: FunctionalityService,
@@ -23,7 +34,9 @@ export class CreateTaskComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       status: ['', Validators.required],
-      functionalityId: ['', Validators.required]
+      functionalityId: ['', Validators.required],
+      priority: ['', Validators.required],
+      estimatedTime: ['', Validators.required]
     });
   }
 
@@ -39,6 +52,13 @@ export class CreateTaskComponent implements OnInit {
   }
 
   createTask() {
+    this.task.createdDate = new Date();
+
+    if (this.task.status === 'DOING') {
+      this.task.startDate = new Date(); 
+    } else if (this.task.status === 'DONE') {
+      this.task.endDate = new Date(); 
+    }
     if (this.taskForm.valid) {
       const newTask = new Task(
         this.taskService.getNewTaskId(),
@@ -46,7 +66,9 @@ export class CreateTaskComponent implements OnInit {
         this.taskForm.value.description,
         this.taskForm.value.status,
         this.taskForm.value.priority,
-        this.taskForm.value.functionalityId
+        this.taskForm.value.functionalityId,
+        this.taskForm.value.estimatedTime,
+        this.task.createdDate,
       );
       const functionalityId = this.taskForm.value.functionalityId;
       console.log('Creating task for functionalityId:', functionalityId); 

@@ -25,7 +25,19 @@
         <option value="WYSOKI">WYSOKI</option>
       </select>
     </div>
-    
+    <div>
+      <label for="estimatedTime">Przewidywany czas wykonania:</label>
+      <input type="number" id="estimatedTime" formControlName="estimatedTime" required>
+      <a> godz.</a>
+    </div>
+    <div>
+      <label for="startDate">Data rozpoczęcia:</label>
+      <input type="date" id="startDate" formControlName="startDate">
+    </div>
+    <div>
+      <label for="endDate">Data zakończenia:</label>
+      <input type="date" id="endDate" formControlName="endDate">
+    </div>
     <button type="submit">Wyślij</button>
   </form>
 </div>

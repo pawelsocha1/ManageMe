@@ -29,5 +29,10 @@
       <option *ngFor="let functionality of functionalities" [value]="functionality.functionalityId">{{ functionality.name }}</option>
     </select>
   </div>
+  <div>
+    <label for="estimatedTime">Przewidywany czas wykonania:</label>
+    <input type="number" id="estimatedTime" formControlName="estimatedTime" required>
+    <a> godz:</a>
+  </div>
   <button type="submit">Utwórz zadanie</button>
 </form>
