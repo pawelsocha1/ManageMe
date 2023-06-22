@@ -4,6 +4,7 @@ import { FunctionalityService } from '../services/functionality.service';
 import { Task } from '../models/task.model';
 import { Functionality } from '../models/functionality.model';
 import { tap } from 'rxjs/operators';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-functionality-details',
@@ -16,7 +17,8 @@ export class FunctionalityDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private functionalityService: FunctionalityService
+    private functionalityService: FunctionalityService,
+    private taskService: TaskService
   ) {}
 
   ngOnInit() {
@@ -34,18 +36,28 @@ export class FunctionalityDetailsComponent implements OnInit {
       )
       .subscribe(() => {
         this.getTasksForFunctionality(); 
-
       });
   }
 
   getTasksForFunctionality(): void {
-    console.log(this.functionality?.functionalityId)
     if (this.functionality) {
       this.functionalityService.getTasksForFunctionality(this.functionality.functionalityId)
         .subscribe((tasks: Task[]) => {
           this.tasks = tasks;
           console.log('Tasks for functionality:', this.tasks);
         });
+    }
+  }
+
+  markTaskAsDoing(task: Task): void {
+    task.status = 'DOING';
+    this.taskService.updateTask(task);
+  }
+
+  markFunctionalityAsDone(): void {
+    if (this.functionality) {
+      this.functionality.status = 'DONE';
+      this.functionalityService.updateFunctionality(this.functionality);
     }
   }
 }

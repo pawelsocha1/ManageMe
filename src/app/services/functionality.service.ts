@@ -3,6 +3,7 @@ import { Functionality } from '../models/functionality.model';
 import { Task } from '../models/task.model';
 import { BehaviorSubject, Observable, map, of, switchMap, tap } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,11 +11,13 @@ export class FunctionalityService {
   private localStorageKey = 'functionalities';
   private functionalities: Functionality[] = [];
   private selectedFunctionalitySubject = new BehaviorSubject<Functionality | undefined>(undefined);
+  
 
 
   selectedFunctionality$ = this.selectedFunctionalitySubject.asObservable();
 
   constructor() {
+    
     this.loadFunctionalitiesFromLocalStorage();
   }
 

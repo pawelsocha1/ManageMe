@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegistrationFormComponent },
   { path: 'task-details/:taskId', component: TaskDetailsComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/projects' }
+  { path: '**', redirectTo: '/task-list' }
 ];
 
 @NgModule({

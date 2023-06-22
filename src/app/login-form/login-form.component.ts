@@ -34,7 +34,7 @@ export class LoginFormComponent implements OnInit {
     const password = this.loginForm.get('password')?.value;
     
     if (this.authService.login(username, password)) {
-      const targetUrl = this.route.snapshot.queryParams['target'] || '/projects';
+      const targetUrl = this.route.snapshot.queryParams['target'] || '/functionality-list';
       this.router.navigateByUrl(targetUrl);
     } else {
       this.loginError = 'Niepoprawne dane logowania';
