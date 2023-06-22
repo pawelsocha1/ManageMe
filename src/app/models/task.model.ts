@@ -5,6 +5,10 @@ export class Task {
   public status: 'TODO' | 'DOING' | 'DONE';
   public priority: 'NISKI' | 'ŚREDNI' | 'WYSOKI';
   public functionalityId: number;
+  public estimatedTime: number; 
+  public createdDate: Date; 
+  public startDate?: Date; 
+  public endDate?: Date; 
   
 
   constructor(
@@ -13,7 +17,9 @@ export class Task {
     description: string,
     status: 'TODO' | 'DOING' | 'DONE',
     priority: 'NISKI' | 'ŚREDNI' | 'WYSOKI',
-    functionalityId: number
+    functionalityId: number,
+    estisatedTime: number,
+    createdDate: Date,
     
   ) {
     this.taskId = taskId;
@@ -22,5 +28,7 @@ export class Task {
     this.status = status;
     this.priority = priority;
     this.functionalityId = functionalityId;
+    this.estimatedTime = estisatedTime;
+    this.createdDate = createdDate;
   }
 }
